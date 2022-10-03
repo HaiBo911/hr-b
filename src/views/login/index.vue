@@ -15,15 +15,15 @@
         </h3>
       </div>
 
-      <el-form-item prop="username">
+      <el-form-item prop="mobile">
         <span class="svg-container">
           <svg-icon icon-class="user" />
         </span>
         <el-input
-          ref="username"
-          v-model="loginForm.username"
-          placeholder="Username"
-          name="username"
+          ref="mobile"
+          v-model="loginForm.mobile"
+          placeholder="请输入手机号"
+          name="mobile"
           type="text"
           tabindex="1"
           auto-complete="on"
@@ -60,10 +60,6 @@
         @click.native.prevent="handleLogin"
       >Login</el-button>
 
-      <!-- <div class="tips">
-        <span style="margin-right: 20px">username: admin</span>
-        <span> password: any</span>
-      </div> -->
       <div class="tips">
         <span style="margin-right: 20px">账号: 13800000002</span>
         <span>密码: 123456</span>
@@ -73,41 +69,26 @@
 </template>
 
 <script>
-import { validUsername } from '@/utils/validate'
+// import { validUsername } from '@/utils/validate'
 
 export default {
   name: 'Login',
   data() {
-    const validateUsername = (rule, value, callback) => {
-      if (!validUsername(value)) {
-        callback(new Error('Please enter the correct user name'))
-      } else {
-        callback()
-      }
-    }
-    const validatePassword = (rule, value, callback) => {
-      if (value.length < 6) {
-        callback(new Error('The password can not be less than 6 digits'))
-      } else {
-        callback()
-      }
-    }
     return {
       loginForm: {
-        username: 'admin',
-        password: '111111'
+        mobile: '13800000003',
+        password: '123456'
       },
       loginRules: {
-        username: [
-          { required: true, trigger: 'blur', validator: validateUsername }
+        mobile: [
+          { required: true, message: '手机号必填', trigger: 'blur' },
+          { pattern: /^1[3-9][0-9]{9}$/, message: '请输入正确手机号', trigger: 'blur' }
         ],
         password: [
-          { required: true, trigger: 'blur', validator: validatePassword }
+          { required: true, message: '密码必填', trigger: 'blur' },
+          { min: 6, max: 12, message: '密码必须在 6-12 位之间', trigger: 'blur' }
         ]
-      },
-      loading: false,
-      passwordType: 'password',
-      redirect: undefined
+      }
     }
   },
   watch: {
@@ -130,6 +111,7 @@ export default {
       })
     },
     handleLogin() {
+      console.log('222')
       this.$refs.loginForm.validate((valid) => {
         if (valid) {
           this.loading = true
