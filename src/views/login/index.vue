@@ -70,6 +70,7 @@
 
 <script>
 // import { validUsername } from '@/utils/validate'
+import { mapActions } from 'vuex'
 
 export default {
   name: 'Login',
@@ -94,15 +95,16 @@ export default {
       }
     }
   },
-  // watch: {
-  //   $route: {
-  //     handler: function(route) {
-  //       this.redirect = route.query && route.query.redirect
-  //     },
-  //     immediate: true
-  //   }
-  // },
+  watch: {
+    $route: {
+      handler: function(route) {
+        this.redirect = route.query && route.query.redirect
+      },
+      immediate: true
+    }
+  },
   methods: {
+    ...mapActions(['user/login']),
     showPwd() {
       if (this.passwordType === 'password') {
         this.passwordType = ''
@@ -115,23 +117,24 @@ export default {
     },
     handleLogin() {
       console.log('222')
-      // this.$refs.loginForm.validate((valid) => {
-      //   if (valid) {
-      //     this.loading = true
-      //     this.$store
-      //       .dispatch('user/login', this.loginForm)
-      //       .then(() => {
-      //         this.$router.push({ path: this.redirect || '/' })
-      //         this.loading = false
-      //       })
-      //       .catch(() => {
-      //         this.loading = false
-      //       })
-      //   } else {
-      //     console.log('error submit!!')
-      //     return false
-      //   }
-      // })
+      this.$refs.loginForm.validate(async isOK => {
+        if (isOK) {
+          try {
+            this.loading = true
+            // 只有校验通过了 我们才去调用action
+            await this['user/login'](this.loginForm)
+            // 应该登录成功之后
+            // async标记的函数实际上一个promise对象
+            // await下面的代码 都是成功执行的代码
+            this.$router.push('/')
+          } catch (error) {
+            console.log(error)
+          } finally {
+            //  不论执行try 还是catch  都去关闭转圈
+            this.loading = false
+          }
+        }
+      })
     }
   }
 }
