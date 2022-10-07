@@ -1,3 +1,31 @@
+import router from './router'
+import store from './store'
+
+// 设置白名单
+const whiteList = ['/login', '/404']
+
+router.beforeEach((to, from, next) => {
+  console.log(store.state.user.token)
+  if (store.state.user.token) {
+    // 已登录
+    if (to.path === '/login') {
+      // 已登录的情况再去登录页
+      next('/') // 去往首页
+    } else {
+      // 其他情况直接放行
+      next()
+    }
+  } else {
+    // 若没有token(未登录)
+    if (whiteList.includes(to.path)) {
+      next() // 在白名单中直接放行
+    } else {
+      // 不在白名单中需要先登录
+      next('/login')
+    }
+  }
+})
+
 // import router from './router'
 // import store from './store'
 // import { Message } from 'element-ui'
