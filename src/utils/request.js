@@ -1,6 +1,7 @@
 import axios from 'axios'
 import { Message } from 'element-ui'
 import store from '../store'
+import router from '../router'
 
 const service = axios.create({
   baseURL: process.env.VUE_APP_BASE_API, // 基地址
@@ -28,6 +29,11 @@ service.interceptors.response.use(response => {
     return Promise.reject(new Error(message))
   }
 }, error => {
+  // token失效处理
+  if (error.response && error.response.data.code === 10002) {
+    store.dispatch('user/logout') // 退出登录
+    router.push('/login') // 跳转到登录页
+  }
   Message.error(error.message) // 提示错误信息
   return Promise.reject(error) // 返回执行错误 让当前的执行链跳出成功 直接进入 catch
 })
