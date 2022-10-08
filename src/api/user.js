@@ -23,4 +23,3 @@ export function getUserDetailByid(id) {
   return request.get(`/sys/user/${id}`)
 }
 
-export function logout() { }

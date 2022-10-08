@@ -39,6 +39,14 @@ const actions = {
     const baseResult = { ...result, ...baseInfo }
     context.commit('setUserInfo', baseResult)
     return baseResult
+  },
+
+  // 退出登录
+  async logout({ commit }) {
+    // 删除token
+    commit('removeToken')
+    // 清空用户信息
+    commit('removeUserInfo')
   }
 }
 
