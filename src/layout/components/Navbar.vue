@@ -13,8 +13,9 @@
       <el-dropdown class="avatar-container" trigger="click">
         <div class="avatar-wrapper">
           <!-- <img :src="avatar+'?imageView2/1/w/80/h/80'" class="user-avatar"> -->
-          <img src="../../../src/assets/common/bigUserHeader.png" class="user-avatar">
-          <span class="name">管理员</span>
+          <!-- <img :src="staffPhoto" class="user-avatar"> -->
+          <img v-fiximg="require('../../assets/common/head.jpg')" :src="staffPhoto" class="user-avatar">
+          <span class="name">{{ name }}</span>
           <i class="el-icon-caret-bottom" style="color:#fff" />
         </div>
         <el-dropdown-menu slot="dropdown" class="user-dropdown">
@@ -37,18 +38,17 @@
 
 <script>
 import { mapGetters } from 'vuex'
-// import Breadcrumb from '@/components/Breadcrumb'
 import Hamburger from '@/components/Hamburger'
 
 export default {
   components: {
-    // Breadcrumb,
     Hamburger
   },
   computed: {
     ...mapGetters([
       'sidebar',
-      'avatar'
+      'staffPhoto',
+      'name'
     ])
   },
   methods: {

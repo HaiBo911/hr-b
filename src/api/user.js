@@ -11,9 +11,16 @@ export function login(data) {
 
 // 获取用户的基本资料
 export function getUserInfo() {
-  return request.post('/sys/profile')
+  // return request.post('/sys/profile')
+  return request({
+    url: '/sys/profile',
+    method: 'post'
+  })
 }
 
-export function getInfo(token) { }
+// 获取用户的基本信息接口
+export function getUserDetailByid(id) {
+  return request.get(`/sys/user/${id}`)
+}
 
 export function logout() { }

@@ -4,8 +4,7 @@ import store from './store'
 // 设置白名单
 const whiteList = ['/login', '/404']
 
-router.beforeEach((to, from, next) => {
-  console.log(store.state.user.token)
+router.beforeEach(async(to, from, next) => {
   if (store.state.user.token) {
     // 已登录
     if (to.path === '/login') {
@@ -14,6 +13,10 @@ router.beforeEach((to, from, next) => {
     } else {
       // 其他情况直接放行
       next()
+      if (!store.getters.userId) {
+        console.log('没有用户id')
+        await store.dispatch('user/getUserInfo')
+      }
     }
   } else {
     // 若没有token(未登录)

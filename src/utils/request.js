@@ -13,7 +13,8 @@ service.interceptors.request.use(config => {
 
   // 统一注入token
   if (store.getters.token) {
-    config.headers['Authorization'] = 'Bearer ${store.getters.token}'
+    console.log(store.getters.token)
+    config.headers['Authorization'] = `Bearer ${store.getters.token}`
   }
   return config
 })

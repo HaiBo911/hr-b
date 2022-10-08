@@ -1,7 +1,9 @@
 import { getToken, setToken, removeToken } from '@/utils/auth'
-import { login } from '@/api/user'
+import { login, getUserInfo, getUserDetailByid } from '@/api/user'
+
 const state = {
-  token: getToken() // 设置token初始状态   token持久化 => 放到缓存中
+  token: getToken(), // 设置token初始状态   token持久化 => 放到缓存中
+  userInfo: {} // 接收用户信息
 }
 const mutations = {
   // 设置token
@@ -13,6 +15,14 @@ const mutations = {
   removeToken(state) {
     state.token = null // 清除token
     removeToken() // 清除本地存储token
+  },
+  // 设置用户信息
+  setUserInfo(state, payload) {
+    state.userInfo = { ...payload }
+  },
+  // 删除用户信息
+  removeUserInfo(state) {
+    state.userInfo = {}
   }
 }
 const actions = {
@@ -20,6 +30,15 @@ const actions = {
   async login(context, data) {
     const result = await login(data) // 实际上就是一个promise  result就是执行的结果
     context.commit('setToken', result)
+  },
+
+  // 获取用户资料
+  async getUserInfo(context) {
+    const result = await getUserInfo() // 获取用户基本信息
+    const baseInfo = await getUserDetailByid(result.userId) // 获取用户id
+    const baseResult = { ...result, ...baseInfo }
+    context.commit('setUserInfo', baseResult)
+    return baseResult
   }
 }
 

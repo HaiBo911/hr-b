@@ -12,21 +12,12 @@ import App from './App'
 import store from './store'
 import router from './router'
 
-import '@/icons' // icon
-import '@/permission' // permission control
+import '@/icons' // icon图标
+import '@/permission' // 路由权限控制
 
-/**
- * If you don't want to use mock-server
- * you want to use MockJs for mock api
- * you can execute: mockXHR()
- *
- * Currently MockJs will be used in the production environment,
- * please remove it before going online ! ! !
- */
-// if (process.env.NODE_ENV === 'production') {
-//   const { mockXHR } = require('../mock')
-//   mockXHR()
-// }
+// 注册自定义指令
+import { imageError } from './directives/index'
+Vue.directive('fiximg', imageError)
 
 // set ElementUI lang to EN
 Vue.use(ElementUI, { locale })
