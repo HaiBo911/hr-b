@@ -1,10 +1,14 @@
-/**
- * Created by PanJiaChen on 16/11/18.
- */
+// 封装的工具函数
 
 /**
  * Parse the time to string
- * @param {(Object|string|number)} time
+
+import { push } from "mock/user"
+
+import ItemVue from "@/layout/components/Sidebar/Item.vue"
+
+import { listenerCount } from "process"
+* @param {(Object|string|number)} time
  * @param {string} cFormat
  * @returns {string | null}
  */
@@ -114,4 +118,16 @@ export function param2Obj(url) {
     }
   })
   return obj
+}
+
+export function listToTreeData(list, rootValue) {
+  const arr = []
+  list.forEach(item => {
+    if (item.pid === rootValue) {
+      // 找到之后 就要去找 item 下面有没有子节点
+      item.children = listToTreeData(list, item.id)
+      arr.push(item)
+    }
+  })
+  return arr
 }
