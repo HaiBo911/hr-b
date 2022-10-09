@@ -9,7 +9,8 @@ export default {
       path: '', // 二级路由(默认)
       component: () => import('@/views/approvals'),
       meta: { // 路由元信息
-        title: '审批管理'
+        title: '审批管理',
+        icon: 'tree-table'
       }
     }
   ]

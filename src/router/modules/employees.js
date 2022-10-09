@@ -9,7 +9,8 @@ export default {
       path: '', // 二级路由(默认)
       component: () => import('@/views/employees'),
       meta: { // 路由元信息
-        title: '员工管理'
+        title: '员工管理',
+        icon: 'people'
       }
     }
   ]

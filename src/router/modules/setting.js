@@ -9,7 +9,8 @@ export default {
       path: '', // 二级路由(默认)
       component: () => import('@/views/setting'),
       meta: { // 路由元信息
-        title: '公司设置'
+        title: '公司设置',
+        icon: 'setting'
       }
     }
   ]

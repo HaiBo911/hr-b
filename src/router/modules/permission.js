@@ -9,7 +9,8 @@ export default {
       path: '', // 二级路由(默认)
       component: () => import('@/views/permission'),
       meta: { // 路由元信息
-        title: '权限管理'
+        title: '权限管理',
+        icon: 'lock'
       }
     }
   ]

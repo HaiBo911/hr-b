@@ -9,7 +9,8 @@ export default {
       path: '', // 二级路由(默认)
       component: () => import('@/views/departments'),
       meta: { // 路由元信息
-        title: '组织架构'
+        title: '组织架构',
+        icon: 'tree'
       }
     }
   ]

@@ -9,7 +9,8 @@ export default {
       path: '', // 二级路由(默认)
       component: () => import('@/views/social'),
       meta: { // 路由元信息
-        title: '社保管理'
+        title: '社保管理',
+        icon: 'table'
       }
     }
   ]
