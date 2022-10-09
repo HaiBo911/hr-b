@@ -17,3 +17,7 @@ export function getDepartments() {
 export function delDepartments(id) {
   return request.delete(`/company/department/${id}`)
 }
+
+export function addDepartments(data) {
+  return request.post('/company/department', data)
+}

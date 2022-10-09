@@ -1,4 +1,5 @@
 <template>
+  <!-- 树形控件 -->
   <el-row type="flex" justify="space-between" align="middle" style="height: 40px;width: 100%">
     <el-col>
       <!-- 名称应该变成 对应的节点中的name -->
@@ -47,9 +48,9 @@ export default {
   methods: {
     // 操作节点调用的方法
     operateDepts(type) {
-      if (type === 'add') {
-        // 添加子部门的操作
-        console.log('22')
+      if (type === 'add') { // 添加子部门的操作
+        // 告诉父组件 显示弹层
+        this.$emit('addDepts', this.treeNode) // 为何传出treeNode 因为是添加子部门 需要当前部门的数据
       } else if (type === 'edit') {
         //  编辑部门的操作
         console.log('111')
