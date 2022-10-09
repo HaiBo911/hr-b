@@ -8,3 +8,12 @@ import request from '../utils/request'
 export function getDepartments() {
   return request.get('/company/department')
 }
+
+/**
+ * 根据id删除部门
+ * @param {部门id} id
+ * @returns
+ */
+export function delDepartments(id) {
+  return request.delete(`/company/department/${id}`)
+}

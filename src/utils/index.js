@@ -2,12 +2,6 @@
 
 /**
  * Parse the time to string
-
-import { push } from "mock/user"
-
-import ItemVue from "@/layout/components/Sidebar/Item.vue"
-
-import { listenerCount } from "process"
 * @param {(Object|string|number)} time
  * @param {string} cFormat
  * @returns {string | null}
